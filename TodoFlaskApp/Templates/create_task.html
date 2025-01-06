@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Create Task{% endblock %}
+
+{% block content %}
+<h1>Create a New Task</h1>
+<form method="POST" action="{{ url_for('routes.create_task') }}">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.title.label }}
+        {{ form.title(class="form-control") }}
+        {% if form.title.errors %}
+            <ul class="errors">
+                {% for error in form.title.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
+</form>
+<a href="{{ url_for('routes.dashboard') }}">Back to Dashboard</a>
+{% endblock %}

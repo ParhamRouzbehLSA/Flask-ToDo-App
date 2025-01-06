@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Welcome, {{ current_user.username }}!</h1>
+    <div class="button-container">
+        <a href="{{ url_for('routes.create_task') }}" class="button">Add New Task</a>
+    </div>
+    <h2>Your Tasks:</h2>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.title }}
+                <span>
+                    <a style="color: #19e646;" href="{{ url_for('routes.edit_task', task_id=task.id) }}">Edit</a>
+                    <a href="{{ url_for('routes.delete_task', task_id=task.id) }}" class="text-danger">Delete</a>
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="button-container">
+        <a href="{{ url_for('routes.logout') }}" class="button">Logout</a>
+    </div>
+</div>
+{% endblock %}
